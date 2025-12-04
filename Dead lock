@@ -1,0 +1,31 @@
+import threading
+import time
+
+resource_a=threading.Lock()
+resource_b=threading.Lock()
+
+def thread_fun_1():
+    with resource_a:
+        print("thread 1 acqured resource A")
+        time.sleep(1)
+        print("thread 1 waiting resource B")
+        with resource_b:
+            print("thread 1 acqured resource B")
+
+def thread_fun_2():
+   with resource_b:
+        print("thread 2 acqured resource B")
+        time.sleep(1)
+        print("thread 2 waiting resource A")
+        with resource_a:
+            print("thread 1 acqured resource A")
+
+thread1=threading.Thread(target=thread_fun_1)
+thread2=threading.Thread(target=thread_fun_2)
+
+thread1.start()
+thread2.start()
+
+thread1.join()
+thread2.join()
+
