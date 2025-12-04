@@ -13,3 +13,4 @@ a=threading.Thread(target=print_1,name="thread_1")
 b=threading.Thread(target=print_2,name="thread_2") 
 a.start() 
 b.start()
+# Project implementation complete
